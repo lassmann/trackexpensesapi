@@ -81,6 +81,7 @@ export function show(req, res) {
 
 // Creates a new Expense in the DB
 export function create(req, res) {
+  req.body.user_id = req.user._id;
   return Expense.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -109,8 +110,15 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a Expense from the DB
+// Deletes a Expense from the DB. Only a user can delete it's expenses
 export function destroy(req, res) {
+  return Expense.findById(req.params.id).exec()
+    .then(handleEntityNotFound(res))
+    .then(removeEntity(res))
+    .catch(handleError(res));
+}
+
+export function getExpenses(req, res) {
   return Expense.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))

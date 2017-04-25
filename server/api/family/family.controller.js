@@ -23,6 +23,7 @@ function respondWithResult(res, statusCode) {
   };
 }
 
+
 function patchUpdates(patches) {
   return function(entity) {
     try {
@@ -109,10 +110,40 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a Family from the DB
+// Only the owner can delete
 export function destroy(req, res) {
   return Family.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+//
+export function addMember(req, res) {
+
+}
+
+//if the user is an owner he can add a family owner
+export function addOwner (req, res){
+
+
+}
+//only an owner can delete to another owner
+export function deleteOwner (){
+
+}
+
+//a user can delete
+export function deleteMember (){
+
+}
+
+//as an user without family, you can request an invite to his family sending a request to the owner/s
+export function requestInvite (){
+
+}
+
+//receives two dates and return the total expenses, and total amount
+export function getExpenses (){
+
 }
