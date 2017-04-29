@@ -11,7 +11,8 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Expense from './expense.model';
+import {Expense, ExpenseType} from './expense.model';
+
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -81,8 +82,15 @@ export function show(req, res) {
 
 // Creates a new Expense in the DB
 export function create(req, res) {
-  req.body.user_id = req.user._id;
+  req.body.userId = req.user._id;
   return Expense.create(req.body)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+export function createExpenseType (req, res, nex){
+  req.body.userId = req.user._id;
+  return ExpenseType.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }

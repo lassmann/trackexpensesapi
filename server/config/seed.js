@@ -17,13 +17,15 @@ export default function seedDatabaseIfNeeded() {
           provider: 'local',
           name: 'Lucas Assmann',
           email: 'l.assmann.30@gmail.com',
-          password: 'admin'
+          password: 'admin',
+          language: 'SPA'
         },
           {
             provider: 'local',
             name: 'Samanta casal',
             email: 'samanta.maria.casal@gmail.com',
-            password: 'admin'
+            password: 'admin',
+            language: 'SPA'
           }])
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));

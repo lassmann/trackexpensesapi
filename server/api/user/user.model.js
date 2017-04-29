@@ -34,7 +34,8 @@ var UserSchema = new Schema({
       }
     }
   },
-  language: {type: String, required: true, default: 'ENG' },
+  language: {type: String, required: true, default: 'ENG'},
+  currency: {type: String, default: 'USD'},
   provider: String,
   salt: String,
   facebook: {},
