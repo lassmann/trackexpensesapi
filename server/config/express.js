@@ -64,20 +64,20 @@ export default function(app) {
    * Lusca - express server security
    * https://github.com/krakenjs/lusca
    */
-  if(env !== 'test' && !process.env.SAUCE_USERNAME) {
-    app.use(lusca({
-      csrf: {
-        angular: true
-      },
-      xframe: 'SAMEORIGIN',
-      hsts: {
-        maxAge: 31536000, //1 year, in seconds
-        includeSubDomains: true,
-        preload: true
-      },
-      xssProtection: true
-    }));
-  }
+  // if(env !== 'test' && !process.env.SAUCE_USERNAME) {
+  //   app.use(lusca({
+  //     csrf: {
+  //       angular: true
+  //     },
+  //     //xframe: 'SAMEORIGIN',
+  //     hsts: {
+  //       maxAge: 31536000, //1 year, in seconds
+  //       includeSubDomains: true,
+  //       preload: true
+  //     },
+  //     xssProtection: true
+  //   }));
+  // }
 
   if(env === 'development') {
     const webpackDevMiddleware = require('webpack-dev-middleware');
