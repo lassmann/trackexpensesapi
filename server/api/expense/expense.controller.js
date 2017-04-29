@@ -80,9 +80,21 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+/**
+ * return all the expense types and user expense types if exists
+ * @param req
+ * @param res
+ */
+export function showExpenseTypes(req, res) {
+  return ExpenseType.find({}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Expense in the DB
 export function create(req, res) {
-  req.body.userId = req.user._id;
+  req.body.userId = req.user && req.user._id;
   return Expense.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

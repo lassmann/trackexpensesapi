@@ -9,8 +9,6 @@ module.exports = {
   mongo: {
     uri: 'mongodb://localhost/trackexpenses-dev'
   },
-
   // Seed database on startup
-  seedDB: true
-
+  seedDB: false
 };
