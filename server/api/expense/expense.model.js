@@ -11,5 +11,15 @@ var ExpenseSchema = new mongoose.Schema({
   description: String
 });
 
+var ExpenseTypeSchema = new mongoose.Schema({
+  value: {type: String, required:true  },
+  language: {type: String, default: 'ENG'}
+});
+
 registerEvents(ExpenseSchema);
-export default mongoose.model('Expense', ExpenseSchema);
+
+var Expense = mongoose.model('Expense', ExpenseSchema);
+var ExpenseType = mongoose.model('ExpenseType', ExpenseTypeSchema);
+
+exports.Expense = Expense;
+exports.ExpenseType = ExpenseType;
