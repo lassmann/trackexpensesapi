@@ -18,6 +18,11 @@ mongoose.connection.on('error', function(err) {
   process.exit(-1); // eslint-disable-line no-process-exit
 });
 
+//keep my dyno awake, I am poor, sorry
+setInterval(function() {
+  http.get("https://trackexpenses.herokuapp.com/.herokuapp.com");
+}, 300000);
+
 // Setup server
 var app = express();
 var server = http.createServer(app);
