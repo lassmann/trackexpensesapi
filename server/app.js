@@ -20,8 +20,8 @@ mongoose.connection.on('error', function(err) {
 
 //keep my dyno awake, I am poor, sorry
 setInterval(function() {
-  http.get("https://trackexpenses.herokuapp.com/.herokuapp.com");
-}, 300000);
+  http.get("http://trackexpenses.herokuapp.com/");
+}, 25000);
 
 // Setup server
 var app = express();

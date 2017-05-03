@@ -67,7 +67,11 @@ function handleError(res, statusCode) {
 
 // Gets a list of Expenses
 export function index(req, res) {
-  return Expense.find().exec()
+  return Expense.find(
+    {
+      "_id":req.user._id
+    }
+  ).sort('-expenseDate').exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -143,4 +147,13 @@ export function getExpenses(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+/**
+ * Return all the expenses by date and ordered
+ */
+export function getByDate (req, res){
+  return Expense.find({_id:req.user._id}).exec()
+    .then()
+
 }
