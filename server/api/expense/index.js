@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/expenseType', controller.showExpenseTypes);
 router.post('/expenseType', auth.isAuthenticated(),controller.createExpenseType);
-router.get('byDate', controller.getByDate);
+router.get('/byDate', auth.isAuthenticated(), controller.getByDate);
 router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(),controller.create);
 router.put('/:id', controller.upsert);

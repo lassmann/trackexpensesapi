@@ -155,9 +155,20 @@ export function getExpenses( req, res ) {
 
 /**
  * Return all the expenses by date and ordered
+ * you shoud pass the dates in format YYYY-MM-DD. ex api/expense/byDate?from=2017-01-01&to=2017-01-02
  */
 export function getByDate( req, res ) {
-  return Expense.find( { _id: req.user._id } ).exec()
-    .then()
+  const from = req.query.from ? new Date( req.query.from ) : new Date();
+  const to = req.query.to ? new Date( req.query.to ) : new Date();
 
+  return Expense.find( {
+      "userId": req.user._id,
+      "expenseDate": {
+        $gte: from,
+        $lte: to
+      }
+    }
+  ).sort( '-expenseDate' ).exec()
+    .then( respondWithResult( res, 200 ) )
+    .catch( handleError( res ) )
 }
