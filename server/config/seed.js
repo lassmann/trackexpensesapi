@@ -5,7 +5,6 @@
 
 'use strict';
 import User from '../api/user/user.model';
-import {ExpenseType} from '../api/expense/expense.model'
 import config from './environment/';
 import  expenseTypes from './seeds/expenseType'
 
@@ -30,13 +29,6 @@ export default function seedDatabaseIfNeeded() {
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));
       });
-
-    ExpenseType.find({}).remove()
-      .then(()=>{
-        ExpenseType.create(expenseTypes )
-      })
-      .then(() => console.log('finished populating expensetypes'))
-      .catch(err => console.log('error populating expensetypes', err));
 
   }
 }

@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import { Expense, ExpenseType } from './expense.model';
+import { Expense } from './expense.model';
 
 
 function respondWithResult( res, statusCode ) {
@@ -84,12 +84,20 @@ export function show( req, res ) {
 }
 
 /**
- * return all the expense types and user expense types if exists
+ * return all the expense types of an user
  * @param req
  * @param res
  */
-export function showExpenseTypes( req, res ) {
-  return ExpenseType.find( {} ).exec()
+export function getExpenseTypes( req, res ) {
+  var lastMonth = new Date();
+  lastMonth.setDate( lastMonth.getDate() - 30 );
+  return Expense.find( {
+    userId: req.user._id,
+    expenseDate: {
+      $gte: lastMonth,
+      $lte: new Date()
+    }
+  }, { expenseType: 1, _id: 0  } ).exec()
     .then( handleEntityNotFound( res ) )
     .then( respondWithResult( res ) )
     .catch( handleError( res ) );
@@ -99,13 +107,6 @@ export function showExpenseTypes( req, res ) {
 export function create( req, res ) {
   req.body.userId = req.user && req.user._id;
   return Expense.create( req.body )
-    .then( respondWithResult( res, 201 ) )
-    .catch( handleError( res ) );
-}
-
-export function createExpenseType( req, res, nex ) {
-  req.body.userId = req.user._id;
-  return ExpenseType.create( req.body )
     .then( respondWithResult( res, 201 ) )
     .catch( handleError( res ) );
 }
