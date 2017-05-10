@@ -161,14 +161,21 @@ export function getByDate( req, res ) {
   const from = req.query.from ? new Date( req.query.from ) : new Date();
   const to = req.query.to ? new Date( req.query.to ) : new Date();
 
-  return Expense.find( {
-      "userId": req.user._id,
-      "expenseDate": {
-        $gte: from,
-        $lte: to
+  return Expense
+    .aggregate( [
+      {
+        $match: { "userId": req.user._id, expenseDate: { $gte: from, $lte: to } }
+      },
+      {
+        $group: {
+          _id: null,
+          count: { $sum: 1 },
+          total: { $sum: "$amount" },
+          expenses: { $push: "$$ROOT" }
+        }
       }
-    }
-  ).sort( '-expenseDate' ).exec()
+    ] )
+    .sort( '-expenseDate' ).exec()
     .then( respondWithResult( res, 200 ) )
     .catch( handleError( res ) )
 }
