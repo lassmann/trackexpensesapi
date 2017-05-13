@@ -39,6 +39,8 @@ var all = {
   // MongoDB connection options
   mongo: {
     options: {
+      keepAlive: 3000000,
+      connectTimeoutMS: 300000,
       db: {
         safe: true
       }

@@ -7,7 +7,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/trackexpenses-dev'
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/trackexpenses-dev'
   },
   // Seed database on startup
   seedDB: false
