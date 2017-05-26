@@ -40,7 +40,7 @@ export function create(req, res) {
   newUser.save()
     .then(function(user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
-        expiresIn: 60 * 60 * 5
+        expiresIn: 0
       });
       res.json({ token });
     })

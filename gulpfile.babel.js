@@ -18,6 +18,7 @@ import {protractor, webdriver_update} from 'gulp-protractor';
 import {Instrumenter} from 'isparta';
 import webpack from 'webpack-stream';
 import makeWebpackConfig from './webpack.make';
+const run = require('gulp-run');
 
 var plugins = gulpLoadPlugins();
 var config;
@@ -579,6 +580,20 @@ grunt.initConfig({
 });
 
 grunt.loadNpmTasks('grunt-build-control');
+
+gulp.task('deploy',function (cb){
+  runSequence(
+    [
+      'build'
+    ],
+    ['commit-deploy'],
+    cb);
+
+});
+
+gulp.task('commit-deploy',function (){
+    return run(`cd dist && git add -A && git commit -am 'deploy' && git push heroku master`, { verbosity: 3 }).exec()
+});
 
 gulp.task('buildcontrol:heroku', function(done) {
     grunt.tasks(
