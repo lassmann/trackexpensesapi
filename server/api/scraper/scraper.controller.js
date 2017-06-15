@@ -109,7 +109,7 @@ export function userRanking(req, res) {
       json.country = country;
       const rankings = [];
       $('.col-md-9').each(function(i, elem) {
-        if(i == 0) {
+        if(i === 0) {
           $(this).children().each(function(i, elem) {
             if($(this).html().length) {
               const rank = {};
