@@ -12,6 +12,7 @@ export default function(app) {
   app.use('/api/family', require('./api/family'));
   app.use('/api/expense', require('./api/expense'));
   app.use('/api/user', require('./api/user'));
+  app.use('/api/scraper', require('./api/scraper'));
 
   app.use('/auth', require('./auth').default);
 
