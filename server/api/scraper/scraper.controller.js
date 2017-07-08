@@ -113,11 +113,12 @@ export function userRanking(req, res) {
           $(this).children().each(function(i, elem) {
             if($(this).html().length) {
               const rank = {};
-              rank['language'] = $(this).find('p').first().text().replace('ranking', '').trim();
-              rank['worldwide'] = $(this).find('tbody').children().first().next().next().children().last().text().trim();
-              rank['repos'] = $(this).find('tbody').children().last().prev().children().last().text().trim();
-              rank['stars'] = $(this).find('tbody').children().last().children().last().text().trim();
-              rank['country'] = $(this).find('tbody').children().first().next().children().last().text().trim();
+              rank.language = $(this).find('p').first().text().replace('ranking', '').trim();
+              rank.worldwide = $(this).find('tbody').children().first().next().next().children().last().text().trim();
+              rank.repos = $(this).find('tbody').children().last().prev().children().last().text().trim();
+              rank.stars = $(this).find('tbody').children().last().children().last().text().trim();
+              rank.country = $(this).find('tbody').children().first().next().children().last().text().trim();
+              rank.city = $(this).find('tbody').children().first().children().find('a').text().trim();
               rankings.push(rank);
             }
           });
