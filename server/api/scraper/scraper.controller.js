@@ -72,7 +72,7 @@ function scrape(url) {
 
 export function cityRanking(req, res) {
   const city = req.params.city;
-  const language = req.params.language;
+  const language = encodeURIComponent(req.params.language).toLowerCase();
   const url = `http://git-awards.com/users?utf8=%E2%9C%93&type=city&language=${language}&city=${city}`;
   scrape(url)
     .then(respondWithResult(res))
@@ -81,7 +81,7 @@ export function cityRanking(req, res) {
 
 export function countryRanking(req, res) {
   const country = req.params.country;
-  const language = req.params.language;
+  const language = encodeURIComponent(req.params.language).toLowerCase();
   const url = `http://git-awards.com/users?utf8=%E2%9C%93&type=country&language=${language}&country=${country}`;
   scrape(url)
     .then(respondWithResult(res))
@@ -89,7 +89,7 @@ export function countryRanking(req, res) {
 }
 
 export function worldRanking(req, res) {
-  const language = req.params.language;
+  const language = encodeURIComponent(req.params.language).toLowerCase();
   const url = `http://git-awards.com/users?utf8=%E2%9C%93&type=world&language=${language}`;
   scrape(url)
     .then(respondWithResult(res))
